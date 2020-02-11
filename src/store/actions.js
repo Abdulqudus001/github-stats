@@ -14,5 +14,11 @@ export default {
       const names = data.map(language => language.name)
       commit('updateLanguage', names)
     })
+  },
+  storeUsers: (({ commit }, payload) => {
+    commit('setUsers', payload)
+  }),
+  clearUsers: ({commit}) => {
+    commit('clearUsers')
   }
 }

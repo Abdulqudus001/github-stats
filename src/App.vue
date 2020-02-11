@@ -17,6 +17,9 @@ export default {
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
+  @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+</style>
+<style>
 body {
   background: #2c3e50;
 }
@@ -25,7 +28,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #fff;
   width: 1366px;
   max-width: calc(100% - 30px);
   padding: 0 15px;
@@ -34,5 +37,5 @@ body {
 </style>
 
 <style lang="scss">
-  $primary: red;
+  $primary: #2c3e50;
 </style>

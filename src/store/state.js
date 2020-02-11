@@ -1,4 +1,5 @@
 export default {
   countries: [],
-  languages: []
+  languages: [],
+  users: []
 }
