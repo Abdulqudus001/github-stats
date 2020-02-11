@@ -15,5 +15,6 @@ const store = new Vuex.Store({
 })
 
 store.dispatch('fetchCountries')
+store.dispatch('fetchLanguages')
 
 export default store;

@@ -1,3 +1,4 @@
 export default {
-  getCountries: state => state.countries
+  getCountries: state => state.countries,
+  getLanguages: state => state.languages
 }

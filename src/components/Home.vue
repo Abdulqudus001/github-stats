@@ -2,7 +2,7 @@
   <div>
     <div class="options">
       <vue-multiselect v-model="country" :options="getCountries" />
-      <vue-multiselect v-model="country" :options="getCountries" />
+      <vue-multiselect v-model="country" :options="getLanguages" />
     </div>
   </div>
 </template>
@@ -14,7 +14,10 @@ export default {
     country: ''
   }),
   computed: {
-    ...mapGetters(['getCountries'])
+    ...mapGetters([
+      'getCountries',
+      'getLanguages'
+    ])
   },
   mounted() {
     console.log(this.$store.state.countries);
