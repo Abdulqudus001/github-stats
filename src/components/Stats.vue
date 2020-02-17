@@ -1,22 +1,40 @@
 <template>
-  <div>
-    <h2>View percentage of language by country</h2>
-    <div class='options'>
-      <vue-multiselect v-model='country' :options='getCountries' />
-      <vue-multiselect v-model='language' :options='getLanguages' multiple :close-on-select='false'>
-        <template slot='selection' slot-scope='{ values, search, isOpen }'>
-          <span
-            class='multiselect__single'
-            v-if='language.length > 2 &amp;&amp; !isOpen'
-          >{{ language.length }} options selected</span>
-        </template>
-      </vue-multiselect>
-      <button @click='getStats' :disabled="isButtonDisabled">Get Stats</button>
-    </div>
-    <div class='chart'>
-      <highcharts :options='chartOptions'></highcharts>
-    </div>
-  </div>
+  <v-row
+    justify="center"
+  >
+    <v-col
+      cols="12"
+      sm="8"
+    >
+      <div>
+        <h2>View percentage of language by country</h2>
+        <div class='options'>
+          <vue-multiselect v-model='country' :options='getCountries' />
+          <vue-multiselect v-model='language' :options='getLanguages' multiple :close-on-select='false'>
+            <template slot='selection' slot-scope='{ values, search, isOpen }'>
+              <span
+                class='multiselect__single'
+                v-if='language.length > 2 &amp;&amp; !isOpen'
+              >{{ language.length }} options selected</span>
+            </template>
+          </vue-multiselect>
+          <button @click='getStats' :disabled="isButtonDisabled">Get Stats</button>
+        </div>
+        <div class='chart'>
+          <highcharts :options='pieChartOptions'></highcharts>
+        </div>
+      </div>
+    </v-col>
+    <v-col
+      sm="12"
+      md="4"
+    > 
+      <div>
+        <h2>View percentage of language by country</h2>
+        <highcharts :options="barChartOptions"/>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -25,7 +43,7 @@ export default {
   data: () => ({
     country: '',
     language: '',
-    chartOptions: {
+    pieChartOptions: {
       credits: {
         enabled: false
       },
@@ -58,6 +76,59 @@ export default {
           data: []
         }
       ]
+    },
+    barChartOptions: {
+      chart: {
+        type: 'bar'
+      },
+      title: {
+        text: 'Historic World Population by Region'
+      },
+      subtitle: {
+        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+      },
+      xAxis: {
+        categories: ['Javascript', 'Python', 'Ruby', 'Java'],
+        title: {
+            text: null
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+            text: 'Population (millions)',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+      },
+      tooltip: {
+        valueSuffix: ' millions'
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+              enabled: true
+          }
+        }
+      },
+      // legend: {
+      //   layout: 'vertical',
+      //   align: 'right',
+      //   verticalAlign: 'top',
+      //   x: -40,
+      //   y: 80,
+      //   floating: true,
+      //   borderWidth: 1,
+      //   shadow: true
+      // },
+      credits: {
+        enabled: false
+      },
+      series: [{
+        data: [7, 6, 5, 3, 2]
+      }]
     }
   }),
   computed: {

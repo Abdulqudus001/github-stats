@@ -47,17 +47,7 @@
         class="fill-height"
         fluid
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-          >
-            <router-view></router-view>
-          </v-col>
-        </v-row>
+        <router-view></router-view>
       </v-container>
     </v-content>
 
@@ -93,9 +83,9 @@
       items: [
         { icon: 'home', text: 'Home', to: '/' },
         { icon: 'chart-line', text: 'Visualize', to: '/stats' },
-        { icon: 'history', text: 'Another route', to: '/' },
-        { icon: 'featured-play-list', text: 'Another one', to: '/' },
-        { icon: 'watch-later', text: 'Final one', to: '/' },
+        { icon: 'history', text: 'Another route', to: '/empty' },
+        { icon: 'featured-play-list', text: 'Another one', to: '/route' },
+        { icon: 'watch-later', text: 'Final one', to: '/another' },
       ],
     }),
   };
