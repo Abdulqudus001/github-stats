@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <Home />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Home from './components/Home.vue'
 
 export default {
   name: 'App',
-  components: {
-    Home
-  }
-}
+};
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

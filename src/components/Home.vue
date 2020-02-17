@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import User from './users'
+import { mapGetters } from 'vuex';
+import User from './users';
 export default {
   components: { User },
   data: () => ({
@@ -54,12 +54,11 @@ export default {
     
   },
   methods: {
-
     countryChanged() {
-      this.since = 0
-      this.$store.dispatch('clearUsers')
-      this.link = `https://api.github.com/search/users?q=location%3A${this.country}&type=Users&page=${this.page}`
-      this.queryType = 'search'
+      this.since = 0;
+      this.$store.dispatch('clearUsers');
+      this.link = `https://api.github.com/search/users?q=location%3A${this.country}&type=Users&page=${this.page}`;
+      this.queryType = 'search';
       // this.getUsers(`https://api.github.com/search/users?q=location%3A${this.country}&type=Users`, 'search')
     },
     getUsers(url = this.link, type = this.queryType) {
@@ -68,24 +67,23 @@ export default {
           since: this.since,
           page: this.page
         }
-      }
+      };
       this.axios.get(url, options).then(res => {
-        const {data} = res
+        const {data} = res;
         if (type == 'query') {
-          this.since += 30
-          this.$store.dispatch('storeUsers', data)
+          this.since += 30;
+          this.$store.dispatch('storeUsers', data);
         } else if (type == 'search') {
-          this.page += 1
-          this.$store.dispatch('storeUsers', data.items)
+          this.page += 1;
+          this.$store.dispatch('storeUsers', data.items);
         }
-        console.log(this.$store.getters.getUsers);
-        data.length < this.perPage && (this.loadMore = false)
+        data.length < this.perPage && (this.loadMore = false);
       }).catch(err => {
         console.error(err);
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
