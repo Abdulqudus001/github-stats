@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "highcharts": "^8.0.0",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
@@ -41,8 +42,14 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "semi": [2, "always"],
-      "quotes": ["error", "single"]
+      "semi": [
+        2,
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ]
     }
   },
   "browserslist": [

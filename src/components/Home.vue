@@ -54,7 +54,6 @@ export default {
     
   },
   methods: {
-
     countryChanged() {
       this.since = 0;
       this.$store.dispatch('clearUsers');
