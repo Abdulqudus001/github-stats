@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 export default {
   data: () => ({
     search: ''
@@ -27,7 +27,7 @@ export default {
       'getUsers'
     ]),
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

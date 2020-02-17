@@ -15,6 +15,7 @@
     "vue": "^2.6.11",
     "vue-highcharts": "^0.1.0",
     "vue-multiselect": "^2.1.6",
+    "vue-router": "^3.1.5",
     "vue-scroll-loader": "^2.0.5",
     "vuex": "^3.1.2"
   },
@@ -39,7 +40,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "semi": [2, "always"]
+    }
   },
   "browserslist": [
     "> 1%",
