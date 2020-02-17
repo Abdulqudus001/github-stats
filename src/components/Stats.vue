@@ -26,6 +26,9 @@ export default {
     country: '',
     language: '',
     chartOptions: {
+      credits: {
+        enabled: false
+      },
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -88,7 +91,7 @@ export default {
   width: 800px;
   margin: 10px auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
   gap: 20px;
   align-items: center;
@@ -96,11 +99,26 @@ export default {
   button {
     max-width: 150px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 6px;
     border: 2px solid #fff;
     background: none;
     color: #fff;
     max-height: 40px;
+    &:hover {
+      background: $primary-light;
+      border: none;
+    }
+  }
+  @media screen and (min-width: 720px) {
+    grid-template-columns:  repeat(auto-fit, minmax(300px, 1fr)) minmax(150px, 1fr)
+  }
+}
+.chart {
+  width: 700px;
+  margin: 0 auto;
+  max-width: 100%;
+  > div {
+    width: 100%;
   }
 }
 </style>
