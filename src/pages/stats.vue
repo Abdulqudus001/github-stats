@@ -2,7 +2,7 @@
   <v-row
     justify="center"
   >
-    <v-col sm="12">
+    <v-col sm="12" class="text-center white--text">
       <h2>View percentage of language by country</h2>
       <div class='options'>
         <vue-multiselect v-model='country' :options='getCountries' />
@@ -28,7 +28,6 @@
       md="4"
     > 
       <div>
-        <h2>View percentage of language by country</h2>
         <highcharts :options="barChartOptions"/>
       </div>
     </v-col>
