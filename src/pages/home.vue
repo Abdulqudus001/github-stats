@@ -19,7 +19,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import User from './users';
+import User from '@/components/users';
 export default {
   components: { User },
   data: () => ({

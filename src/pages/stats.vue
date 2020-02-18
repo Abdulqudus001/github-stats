@@ -2,28 +2,26 @@
   <v-row
     justify="center"
   >
+    <v-col sm="12">
+      <h2>View percentage of language by country</h2>
+      <div class='options'>
+        <vue-multiselect v-model='country' :options='getCountries' />
+        <vue-multiselect v-model='language' :options='getLanguages' multiple :close-on-select='false'>
+          <template slot='selection' slot-scope='{ values, search, isOpen }'>
+            <span
+              class='multiselect__single'
+              v-if='language.length > 2 &amp;&amp; !isOpen'
+            >{{ language.length }} options selected</span>
+          </template>
+        </vue-multiselect>
+        <button @click='getStats' :disabled="isButtonDisabled">Get Stats</button>
+      </div>
+    </v-col>
     <v-col
       cols="12"
       sm="8"
     >
-      <div>
-        <h2>View percentage of language by country</h2>
-        <div class='options'>
-          <vue-multiselect v-model='country' :options='getCountries' />
-          <vue-multiselect v-model='language' :options='getLanguages' multiple :close-on-select='false'>
-            <template slot='selection' slot-scope='{ values, search, isOpen }'>
-              <span
-                class='multiselect__single'
-                v-if='language.length > 2 &amp;&amp; !isOpen'
-              >{{ language.length }} options selected</span>
-            </template>
-          </vue-multiselect>
-          <button @click='getStats' :disabled="isButtonDisabled">Get Stats</button>
-        </div>
-        <div class='chart'>
-          <highcharts :options='pieChartOptions'></highcharts>
-        </div>
-      </div>
+      <PieChart :language="language" :country="country" :pieChartData="pieChartData" />
     </v-col>
     <v-col
       sm="12"
@@ -39,44 +37,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import PieChart from '@/components/pie-chart.vue';
 export default {
+  components: { PieChart },
   data: () => ({
     country: '',
     language: '',
-    pieChartOptions: {
-      credits: {
-        enabled: false
-      },
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: ''
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: false
-          },
-          showInLegend: true
-        }
-      },
-      series: [
-        {
-          name: 'Language',
-          colorByPoint: true,
-          data: []
-        }
-      ]
-    },
+    pieChartData: [],
     barChartOptions: {
       chart: {
         type: 'bar'
@@ -113,16 +80,6 @@ export default {
           }
         }
       },
-      // legend: {
-      //   layout: 'vertical',
-      //   align: 'right',
-      //   verticalAlign: 'top',
-      //   x: -40,
-      //   y: 80,
-      //   floating: true,
-      //   borderWidth: 1,
-      //   shadow: true
-      // },
       credits: {
         enabled: false
       },
@@ -139,15 +96,14 @@ export default {
   },
   methods: {
     getStats() {
-      this.chartOptions.title.text = `Language stats in ${this.country}`;
-      this.chartOptions.series[0].data = [];
+      this.pieChartData = [];
       this.language.forEach(language => {
         this.axios
           .get(
             `https://api.github.com/search/users?q=location%3A${this.country}+language%3A${language}&type=Users`
           )
           .then(res => {
-            this.chartOptions.series[0].data.push({ name: language, y: res.data.total_count });
+            this.pieChartData.push({ name: language, y: res.data.total_count });
             // console.log(counts);
           });
       });

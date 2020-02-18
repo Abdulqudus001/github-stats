@@ -2,9 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 // Importing components
-import Home from '@/components/Home.vue';
-import Stats from '@/components/Stats.vue';
-import ErrorPage from '@/components/404.vue';
+import Home from '@/pages/home.vue';
+import Stats from '@/pages/stats.vue';
+import ErrorPage from '@/pages/404.vue';
 
 Vue.use(VueRouter);
 
