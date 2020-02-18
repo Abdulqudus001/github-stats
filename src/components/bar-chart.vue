@@ -9,42 +9,35 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-  props: ['language', 'country', 'BarChartData'],
+  props: ['language', 'country', 'barChartData'],
   data: () => ({
-    BarChartOptions: {
-      credits: {
-        enabled: false
-      },
+    barChartOptions: {
       chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
         type: 'bar'
       },
-      title: {
-        text: ''
+      yAxis: {
+        min: 0,
+        title: {
+          align: 'high'
+        },
+        labels: {
+          overflow: 'justify'
+        }
       },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      legend: {
+        enabled: false
       },
       plotOptions: {
         bar: {
-          allowPointSelect: true,
-          cursor: 'pointer',
           dataLabels: {
-            enabled: false
-          },
-          showInLegend: true
+            enabled: true
+          }
         }
       },
-      series: [
-        {
-          name: 'Language',
-          colorByPoint: true,
-          data: []
-        }
-      ]
-    },
+      credits: {
+        enabled: false
+      }
+    }
   }),
   computed: {
     ...mapGetters([
@@ -54,12 +47,18 @@ export default {
     getBarChartData() {
       const series = [
         {
-          name: 'Language',
+          name: 'two',
           colorByPoint: true,
-          data: this.BarChartData
+          data: [...this.barChartData],
+          color: 'red'
         }
       ];
-      return {...this.BarChartOptions, series};
+      const categories = this.barChartData.map(arr => arr[0]);
+      const xAxis = {
+        typs: 'category',
+        categories
+      };
+      return {...this.barChartOptions, xAxis, series};
     }
   }
 };

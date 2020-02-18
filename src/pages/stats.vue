@@ -21,14 +21,14 @@
       cols="12"
       sm="8"
     >
-      <PieChart :language="language" :country="country" :pieChartData="pieChartData" />
+      <pie-chart :language="language" :country="country" :pieChartData="pieChartData" />
     </v-col>
     <v-col
       sm="12"
       md="4"
     > 
       <div>
-        <highcharts :options="barChartOptions"/>
+        <bar-chart :language="language" :country="country" :barChartData="barChartData" />
       </div>
     </v-col>
   </v-row>
@@ -37,12 +37,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import PieChart from '@/components/pie-chart.vue';
+import BarChart from '@/components/bar-chart.vue';
 export default {
-  components: { PieChart },
+  components: { PieChart, BarChart },
   data: () => ({
     country: '',
     language: '',
     pieChartData: [],
+    barChartData: [],
     barChartOptions: {
       chart: {
         type: 'bar'
@@ -96,6 +98,7 @@ export default {
   methods: {
     getStats() {
       this.pieChartData = [];
+      this.barChartData = [];
       this.language.forEach(language => {
         this.axios
           .get(
@@ -103,6 +106,7 @@ export default {
           )
           .then(res => {
             this.pieChartData.push({ name: language, y: res.data.total_count });
+            this.barChartData.push([language, res.data.total_count]);
             // console.log(counts);
           });
       });

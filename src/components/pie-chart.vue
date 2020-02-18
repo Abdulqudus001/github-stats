@@ -36,14 +36,7 @@ export default {
           },
           showInLegend: true
         }
-      },
-      series: [
-        {
-          name: 'Language',
-          colorByPoint: true,
-          data: []
-        }
-      ]
+      }
     },
   }),
   computed: {
